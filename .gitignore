@@ -21,11 +21,6 @@ npm-debug.log*
 **/.env.test.local
 **/.env.production.local
 
-# ========================
-# Build outputs
-# ========================
-**/dist/
-**/build/
 
 # ========================
 # Docker
