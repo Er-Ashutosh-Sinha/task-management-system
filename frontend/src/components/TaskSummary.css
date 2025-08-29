@@ -1,0 +1,39 @@
+.task-summary {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.task-summary:hover {
+  transform: translateY(-5px);
+}
+
+.task-summary h3 {
+  margin: 0 0 10px 0;
+  color: #333;
+}
+
+.task-summary .count {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.todo {
+  border-top: 4px solid #007bff;
+}
+
+.in-progress {
+  border-top: 4px solid #ffc107;
+}
+
+.done {
+  border-top: 4px solid #28a745;
+}
+
+.overdue {
+  border-top: 4px solid #dc3545;
+}
