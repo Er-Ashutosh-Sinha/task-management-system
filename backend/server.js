@@ -1,11 +1,13 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const dotenv = require('dotenv');
 const morgan = require('morgan');
 
 // Load environment variables
-dotenv.config();
+require('./config/env');
+
+// to print project staructure uncomment the below line
+// require('./config/printStructure');
 
 // Import routes
 const authRoutes = require('./routes/auth');
@@ -60,7 +62,7 @@ if (process.env.NODE_ENV !== 'test') {
   mongoose
     .connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/taskmanager')
     .then(() => {
-      console.log('Connected to MongoDB');
+      console.log('Connected to MongoDB Database');
       const PORT = process.env.PORT || 5000;
       app.listen(PORT, () => {
         console.log(`Server running on port ${PORT}`);

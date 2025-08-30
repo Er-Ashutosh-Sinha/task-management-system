@@ -2,7 +2,7 @@
 
 **Author: Ashutosh Sinha**
 
-##
+---
 
 A full-stack Task Manager application with authentication, role-based permissions, and a React frontend.
 
@@ -15,6 +15,8 @@ A full-stack Task Manager application with authentication, role-based permission
 - Activity logging for tasks
 - Statistics dashboard
 - Responsive React UI
+
+---
 
 ## Tech Stack
 
@@ -37,6 +39,11 @@ A full-stack Task Manager application with authentication, role-based permission
 
 - Docker & Docker Compose
 
+### Deployment
+
+- Vercel (Frontend)
+- Railway / Render / Dockerized servers (Backend + MongoDB)
+
 ---
 
 ## Getting Started
@@ -47,9 +54,11 @@ A full-stack Task Manager application with authentication, role-based permission
 - Node.js (for local development without Docker)
 - MongoDB (for local development without Docker)
 
+---
+
 ### Environment Variables
 
-**Backend (`backend/.env`):**
+#### Backend (`backend/.env.development` or `backend/.env.production`)
 
 ```env
 NODE_ENV=development
@@ -60,17 +69,9 @@ JWT_EXPIRE=30d
 FRONTEND_URL=http://localhost:3000
 ```
 
-**Frontend (`frontend/.env`):**
-
-```env
-REACT_APP_API_BASE_URL=http://localhost:5000/api
-```
-
-> ⚠️ Note: When building the frontend with Docker, pass `REACT_APP_API_BASE_URL` as a build argument.
-
 ---
 
-### Running with Docker
+## Running with Docker
 
 1. Clone the repository:
 
@@ -87,13 +88,13 @@ docker-compose up --build
 
 3. Services will run on:
 
-- Frontend: [http://localhost:3000](http://localhost:3000)
-- Backend API: [http://localhost:5000](http://localhost:5000)
-- MongoDB: port `27017`
+- Frontend → [http://localhost:3000](http://localhost:3000)
+- Backend API → [http://localhost:5000](http://localhost:5000)
+- MongoDB → port `27017`
 
 ---
 
-### Running Locally without Docker
+## Running Locally (Without Docker)
 
 1. Start MongoDB locally (or via Docker):
 
@@ -123,26 +124,26 @@ npm start
 
 ### Authentication
 
-- `POST /api/auth/register` - Register a new user
-- `POST /api/auth/login` - Login user
-- `POST /api/auth/logout` - Logout user
+- `POST /api/auth/register` → Register a new user
+- `POST /api/auth/login` → Login user
+- `POST /api/auth/logout` → Logout user
 
 ### Users (Admin only)
 
-- `GET /api/users` - Get all users
-- `PATCH /api/users/:id/role` - Update user role
+- `GET /api/users` → Get all users
+- `PATCH /api/users/:id/role` → Update user role
 
 ### Tasks
 
-- `POST /api/tasks` - Create a new task
-- `GET /api/tasks` - Get all tasks (with filtering, sorting, pagination)
-- `GET /api/tasks/:id` - Get a specific task
-- `PUT /api/tasks/:id` - Update a task
-- `DELETE /api/tasks/:id` - Delete a task
+- `POST /api/tasks` → Create a new task
+- `GET /api/tasks` → Get all tasks (filtering, sorting, pagination)
+- `GET /api/tasks/:id` → Get a specific task
+- `PUT /api/tasks/:id` → Update a task
+- `DELETE /api/tasks/:id` → Delete a task
 
 ### Stats
 
-- `GET /api/stats/overview` - Get stats overview
+- `GET /api/stats/overview` → Get stats overview
 
 ---
 
@@ -155,23 +156,21 @@ npm start
 ```bash
 npm run dev          # Start backend with nodemon
 npm start            # Start backend in production mode
-npm run test:backend # Run backend tests
 ```
 
 **Frontend**
 
 ```bash
-npm start            # Start frontend development server
-npm run build        # Build frontend for production
-npm run test:frontend # Run frontend tests
+npm start             # Start frontend development server
+npm run build         # Build frontend for production
 ```
 
 **Docker**
 
 ```bash
-docker-compose up --build      # Start backend, frontend, and MongoDB
+docker-compose up --build      # Start all services
 docker-compose down            # Stop and remove containers
-docker-compose logs -f backend # Follow backend logs
+docker-compose logs -f backend # View backend logs
 ```
 
 ---
@@ -185,9 +184,8 @@ cd backend
 npm run test
 ```
 
-- Tests use an in-memory MongoDB (`mongodb-memory-server`), so no external MongoDB instance is required for running test cases.
-
-- Runs unit and integration tests for controllers, models, and middleware.
+- Tests use an **in-memory MongoDB** (`mongodb-memory-server`) → no external DB needed.
+- Runs unit + integration tests for controllers, models, and middleware.
 
 ---
 
@@ -205,26 +203,33 @@ npm run format      # Format frontend code with Prettier
 
 ```
 task-manager/
+├── .gitignore
+├── README.md
+├── vercel.json
 ├── backend/
+│   ├── .env.development
+│   ├── .env.production
+│   ├── .eslintrc
+│   ├── .eslintrc.js
+│   ├── .prettierrc
+│   ├── Dockerfile
 │   ├── config/
 │   ├── controllers/
 │   ├── middleware/
 │   ├── models/
 │   ├── routes/
 │   ├── tests/
-│   ├── .env.example
+│   ├── server.js
 │   ├── package.json
-│   └── server.js
+│   └── package-lock.json
 ├── frontend/
+│   ├── .eslintrc
+│   ├── .prettierrc
+│   ├── Dockerfile
 │   ├── public/
 │   ├── src/
-│   │   ├── components/
-│   │   ├── contexts/
-│   │   ├── pages/
-│   │   ├── services/
-│   │   └── ...
 │   ├── package.json
-│   └── ...
+│   └── package-lock.json
 └── docker-compose.yml
 ```
 
@@ -232,18 +237,8 @@ task-manager/
 
 ## Role-Based Access Control
 
-- **Members**: Can only manage their own tasks
-- **Admins**: Can manage all tasks and users
-
----
-
-## Notes
-
-- **CORS:** Backend is configured to allow requests from `FRONTEND_URL`.
-- **Docker Networking:** `backend` container connects to `mongo` via service name (`mongodb://mongo:27017/taskmanager`).
-- **Frontend Build Arg:** When building frontend via Docker, pass `REACT_APP_API_BASE_URL` as a build arg to ensure correct API URL.
-
----
+- **Members** → Manage only their own tasks
+- **Admins** → Manage all tasks and users
 
 ## License
 

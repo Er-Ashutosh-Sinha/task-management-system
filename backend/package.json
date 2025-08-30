@@ -4,8 +4,8 @@
   "description": "Backend for Task Manager application",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js",
+    "start": "cross-env NODE_ENV=production node server.js",
+    "dev": "cross-env NODE_ENV=development nodemon server.js",
     "test": "npx jest --setupFilesAfterEnv ./tests/setup.js --watchAll",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
@@ -32,6 +32,7 @@
   "devDependencies": {
     "@types/jest": "^30.0.0",
     "@types/supertest": "^6.0.3",
+    "cross-env": "^7.0.3",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.1.3",

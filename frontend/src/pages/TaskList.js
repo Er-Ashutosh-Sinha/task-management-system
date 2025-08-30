@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import taskService from '../services/taskService';
@@ -23,11 +23,8 @@ const TaskList = () => {
 
   const { user } = useAuth();
 
-  useEffect(() => {
-    fetchTasks();
-  }, [filters, pagination.page]);
-
-  const fetchTasks = async () => {
+  // Memoize fetchTasks so it doesn't change every render
+  const fetchTasks = useCallback(async () => {
     try {
       const token = user?.token || localStorage.getItem('token');
       const filterParams = {
@@ -45,17 +42,22 @@ const TaskList = () => {
 
       const data = await taskService.getTasks(token, filterParams);
       setTasks(data.tasks);
-      setPagination({
-        ...pagination,
+      setPagination(prev => ({
+        ...prev,
         totalPages: data.pagination.totalPages,
         totalTasks: data.pagination.totalTasks,
-      });
+      }));
     } catch (err) {
       setError(err.message || 'Failed to fetch tasks');
     } finally {
       setLoading(false);
     }
-  };
+  }, [user, filters, pagination.page, pagination.limit]);
+
+  // ✅ useEffect now depends on fetchTasks
+  useEffect(() => {
+    fetchTasks();
+  }, [fetchTasks]);
 
   const handleFilterChange = e => {
     setFilters({
@@ -63,17 +65,17 @@ const TaskList = () => {
       [e.target.name]: e.target.value,
     });
     // Reset to first page when filters change
-    setPagination({
-      ...pagination,
+    setPagination(prev => ({
+      ...prev,
       page: 1,
-    });
+    }));
   };
 
   const handlePageChange = newPage => {
-    setPagination({
-      ...pagination,
+    setPagination(prev => ({
+      ...prev,
       page: newPage,
-    });
+    }));
   };
 
   const handleDeleteTask = taskId => {
@@ -97,12 +99,13 @@ const TaskList = () => {
         </Link>
       </div>
 
+      {/* Filters */}
       <div className="filters">
         <div className="form-group">
           <input
             type="text"
             name="search"
-            placeholder="Search by Title/Desciption"
+            placeholder="Search by Title/Description"
             value={filters.search}
             onChange={handleFilterChange}
           />
@@ -133,6 +136,7 @@ const TaskList = () => {
         </div>
       </div>
 
+      {/* Task List */}
       <div className="task-list">
         {tasks.length === 0 ? (
           <p>No tasks found.</p>
@@ -143,24 +147,26 @@ const TaskList = () => {
         )}
       </div>
 
+      {/* Pagination */}
       {pagination.totalPages > 1 && (
         <div className="pagination">
           <button
             onClick={() => handlePageChange(pagination.page - 1)}
             disabled={pagination.page === 1}
-            className="btn btn-secondary"
+            className="btn btn-primary btn-sm"
           >
-            Previous
+            ⟵
           </button>
           <span>
-            Page {pagination.page} of {pagination.totalPages}
+            {pagination.page} of {pagination.totalPages}
           </span>
+
           <button
             onClick={() => handlePageChange(pagination.page + 1)}
             disabled={pagination.page === pagination.totalPages}
-            className="btn btn-secondary"
+            className="btn btn-primary btn-sm"
           >
-            Next
+            ⟶
           </button>
         </div>
       )}
