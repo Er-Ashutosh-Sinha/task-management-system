@@ -14,4 +14,4 @@ COPY . .
 EXPOSE 5000
 
 # Use npm run dev if in development
-CMD ["npm", "run", "dev"]
+CMD ["npm", "start"]
