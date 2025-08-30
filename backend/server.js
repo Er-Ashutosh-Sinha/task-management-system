@@ -22,7 +22,11 @@ const app = express();
 app.use(morgan('dev'));
 app.use(
   cors({
-    origin: ['http://localhost:3000', 'http://frontend:3000'],
+    origin: [
+      'http://localhost:3000',
+      'http://frontend:3000',
+      'https://task-management-system-aks.vercel.app/login',
+    ],
     credentials: true,
   })
 );
