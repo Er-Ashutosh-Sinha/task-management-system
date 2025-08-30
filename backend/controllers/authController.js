@@ -6,18 +6,14 @@ const { generateToken } = require('../config/jwt');
 // @access  Public
 const register = async (req, res, next) => {
   try {
-    console.log('Register body:', req.body); // <-- debug log
-
     const { name, email, password, role } = req.body;
 
     // Check if user already exists
     const userExists = await User.findOne({ email });
-    console.log('Register ste 1'); // <-- debug log
 
     if (userExists) {
       return res.status(400).json({ message: 'User already exists' });
     }
-    console.log('Register ste 2'); // <-- debug log
 
     // Create user
     const user = await User.create({
@@ -26,15 +22,12 @@ const register = async (req, res, next) => {
       password,
       role: role || 'member', // Default to member if no role specified
     });
-    console.log('Register ste 3'); // <-- debug log
 
     // Generate token
     const token = generateToken({
       id: user._id,
       role: user.role,
     });
-
-    console.log('Register ste 4'); // <-- debug log
 
     res.status(201).json({
       _id: user._id,

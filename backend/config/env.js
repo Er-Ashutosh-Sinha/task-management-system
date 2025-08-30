@@ -5,8 +5,8 @@ const env = process.env.NODE_ENV || 'development';
 
 const envPath =
   env === 'production'
-    ? path.join(__dirname, '../.env.production')
-    : path.join(__dirname, '../.env.development');
+    ? path.join(__dirname, '../../.env.production')
+    : path.join(__dirname, '../../.env.development');
 
 dotenv.config({ path: envPath });
 
