@@ -6,6 +6,8 @@
 
 A full-stack Task Manager application with authentication, role-based permissions, and a React frontend.
 
+#### Live Demo: https://task-management-system-aks.vercel.app
+
 ## Features
 
 - User authentication with JWT (email/password)
