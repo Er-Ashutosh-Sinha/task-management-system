@@ -25,7 +25,7 @@ app.use(
     origin: [
       'http://localhost:3000',
       'http://frontend:3000',
-      'https://task-management-system-aks.vercel.app/login',
+      'https://task-management-system-aks.vercel.app',
     ],
     credentials: true,
   })
