@@ -6,7 +6,7 @@
 
 A full-stack Task Manager application with authentication, role-based permissions, and a React frontend.
 
-#### Live Demo: https://task-management-system-aks.vercel.app
+**Live Demo:** https://task-management-system-aks.vercel.app
 
 ## Features
 
@@ -237,7 +237,7 @@ task-manager/
 │   └── src/
 ├── vercel.json
 
----
+```
 
 ## Role-Based Access Control
 
@@ -247,4 +247,3 @@ task-manager/
 ## License
 
 All rights reserved. This software is private and may not be copied, distributed, or used without permission from the author.
-```
