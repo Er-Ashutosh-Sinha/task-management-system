@@ -242,7 +242,7 @@ task-manager/
 ## Role-Based Access Control
 
 - **Members** → Manage only their own tasks
-- **Admins** → Manage all tasks and users
+- **Admins** → Manage all tasks
 
 ## License
 
