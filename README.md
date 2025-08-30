@@ -203,35 +203,37 @@ npm run format      # Format frontend code with Prettier
 
 ```
 task-manager/
+
+├── .env.development
+├── .env.production
 ├── .gitignore
 ├── README.md
-├── vercel.json
 ├── backend/
-│   ├── .env.development
-│   ├── .env.production
-│   ├── .eslintrc
-│   ├── .eslintrc.js
-│   ├── .prettierrc
-│   ├── Dockerfile
-│   ├── config/
-│   ├── controllers/
-│   ├── middleware/
-│   ├── models/
-│   ├── routes/
-│   ├── tests/
-│   ├── server.js
-│   ├── package.json
+│   └── .eslintrc
+│   └── .eslintrc.js
+│   └── .prettierrc
+│   └── Dockerfile
+│   └── config/
+│   └── controllers/
+│   └── middleware/
+│   └── models/
+│   └── node_modules/
 │   └── package-lock.json
+│   └── package.json
+│   └── routes/
+│   └── server.js
+│   └── tests/
+├── docker-compose.yml
 ├── frontend/
-│   ├── .eslintrc
-│   ├── .prettierrc
-│   ├── Dockerfile
-│   ├── public/
-│   ├── src/
-│   ├── package.json
+│   └── .eslintrc
+│   └── .prettierrc
+│   └── Dockerfile
+│   └── node_modules/
 │   └── package-lock.json
-└── docker-compose.yml
-```
+│   └── package.json
+│   └── public/
+│   └── src/
+├── vercel.json
 
 ---
 
@@ -243,3 +245,4 @@ task-manager/
 ## License
 
 All rights reserved. This software is private and may not be copied, distributed, or used without permission from the author.
+```
